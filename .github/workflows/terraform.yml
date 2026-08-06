@@ -7,9 +7,11 @@ on:
 
 env:
   AWS_REGION: us-east-1
+  TF_IN_AUTOMATION: true
 
 jobs:
   terraform:
+    name: Terraform Automation
     runs-on: ubuntu-latest
 
     steps:
@@ -26,19 +28,19 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.15.8
+          terraform_version: "1.15.8"
 
       - name: Terraform Format Check
         run: terraform fmt -check -recursive
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -input=false
 
       - name: Terraform Validate
         run: terraform validate -no-color
 
       - name: Terraform Plan
-        run: terraform plan -out=tfplan -no-color
+        run: terraform plan -input=false -out=tfplan -no-color
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
+        run: terraform apply -input=false -auto-approve tfplan
