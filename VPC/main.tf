@@ -5,13 +5,13 @@ resource "aws_vpc" "main-vpc" {
   }
 }
 
-# resource "aws_internet_gateway" "shoaib-igw" {
-#   vpc_id = aws_vpc.main-vpc.id
+resource "aws_internet_gateway" "shoaib-igw" {
+  vpc_id = aws_vpc.main-vpc.id
 
-#   tags = {
-#     Name = "shoaib-igw"
-#   }
-# }
+  tags = {
+    Name = "shoaib-igw"
+  }
+}
 # resource "aws_default_route_table" "prt-rt" {
 #   default_route_table_id = aws_vpc.main-vpc.default_route_table_id
 
