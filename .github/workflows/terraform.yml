@@ -1,4 +1,4 @@
-name: Terraform CI/CD
+name: shoaib ci cd
 
 on:
   push:
