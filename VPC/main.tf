@@ -1,24 +1,24 @@
-resource "aws_vpc" "main-vpc" {
-  cidr_block = var.vpc-cidr
-  tags = {
-    Name = "shoaib-vpc"
-  }
-}
+# resource "aws_vpc" "main-vpc" {
+#   cidr_block = var.vpc-cidr
+#   tags = {
+#     Name = "shoaib-vpc"
+#   }
+# }
 
-resource "aws_internet_gateway" "shoaib-igw" {
-  vpc_id = aws_vpc.main-vpc.id
+# resource "aws_internet_gateway" "shoaib-igw" {
+#   vpc_id = aws_vpc.main-vpc.id
 
-  tags = {
-    Name = "shoaib-igw"
-  }
-}
-resource "aws_default_route_table" "prt-rt" {
-  default_route_table_id = aws_vpc.main-vpc.default_route_table_id
+#   tags = {
+#     Name = "shoaib-igw"
+#   }
+# }
+# resource "aws_default_route_table" "prt-rt" {
+#   default_route_table_id = aws_vpc.main-vpc.default_route_table_id
 
-  tags = {
-    Name = "shoaib-prv-rt"
-  }
-}
+#   tags = {
+#     Name = "shoaib-prv-rt"
+#   }
+# }
 # data "aws_instance" "nat_instance" {
 #   instance_id = var.public-instance
 # }
