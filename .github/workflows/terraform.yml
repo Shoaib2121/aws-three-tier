@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 env:
   AWS_REGION: us-east-1
@@ -30,17 +33,24 @@ jobs:
         with:
           terraform_version: "1.15.8"
 
+      # Runs on BOTH Pull Requests and Merges
       - name: Terraform Format Check
         run: terraform fmt -check -recursive
 
+      # Runs on BOTH Pull Requests and Merges
       - name: Terraform Init
         run: terraform init -input=false
 
+      # Runs on BOTH Pull Requests and Merges
       - name: Terraform Validate
         run: terraform validate -no-color
 
+      # Runs ONLY during Pull Requests (Validates and Previews Changes)
       - name: Terraform Plan
-        run: terraform plan -input=false -out=tfplan -no-color
+        if: github.event_name == 'pull_request'
+        run: terraform plan -input=false -no-color
 
+      # Runs ONLY when a Pull Request is Merged into Main
       - name: Terraform Apply
-        run: terraform apply -input=false -auto-approve tfplan
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -input=false -auto-approve
