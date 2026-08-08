@@ -12,13 +12,13 @@ resource "aws_internet_gateway" "shoaib-igw" {
     Name = "shoaib-igw"
   }
 }
-# resource "aws_default_route_table" "prt-rt" {
-#   default_route_table_id = aws_vpc.main-vpc.default_route_table_id
+resource "aws_default_route_table" "prt-rt" {
+  default_route_table_id = aws_vpc.main-vpc.default_route_table_id
 
-#   tags = {
-#     Name = "shoaib-prv-rt"
-#   }
-# }
+  tags = {
+    Name = "shoaib-prv-rt"
+  }
+}
 # data "aws_instance" "nat_instance" {
 #   instance_id = var.public-instance
 # }
